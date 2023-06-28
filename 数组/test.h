@@ -1,0 +1,1 @@
+extern const int a = 42;
