@@ -51,3 +51,24 @@ public:
         return reverse(nullptr, head);
     }
 };
+
+class Sulotion_v3
+{
+public:
+    ListNode* reverse(ListNode* head)
+    {
+        // 边缘条件判断
+        if (head == nullptr) return nullptr;
+        if (head->next == nullptr) return head;
+
+        // 边缘条件判断
+        ListNode* last = reverse(head->next);
+
+        // 翻转头节点与第二个节点的指向
+        head->next->next = head;
+        // 此时的 head 节点为尾节点，next 需要指向 NULL
+        head->next = nullptr;
+
+        return last; 
+    }
+};

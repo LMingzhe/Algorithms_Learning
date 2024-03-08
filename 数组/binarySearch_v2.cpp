@@ -13,7 +13,7 @@ public:
         int left = 0;
         int right = nums.size();
         while (left < right) { // 因为left == right的时候，在[left, right)是无效的空间，所以使用 <
-            int middle = left + ((right - left) >> 1);
+            int middle = left + ((right - left) >> 1);  // 通过右移运算符 >> 将上一步的结果右移一位（相当于除以 2，向下取整），这样可以得到区间长度的一半
             cout << "本次middle值:" << middle << endl;
             if (nums[middle] < target) {
                 left = middle + 1;
