@@ -12,6 +12,7 @@ public:
         ListNode* fast = dummyHead;
         ListNode* slow = dummyHead;
 
+        // fast先走n步
         while (n-- && fast != nullptr)  
         {
             fast = fast->next;

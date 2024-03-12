@@ -26,8 +26,7 @@ public:
         }
         curA = headA;
         curB = headB;
-        // 让curA为最长链表的头，lenA为其长度
-        if (lenB > lenA)
+        if (lenB > lenA)             // 让curA为最长链表的头，lenA为其长度
         {
             std::swap(lenB, lenA);
             std::swap(curB, curA);
