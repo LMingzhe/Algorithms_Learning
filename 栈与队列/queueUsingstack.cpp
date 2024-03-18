@@ -3,6 +3,14 @@
 
 using namespace std;
 
+/// leetcode 232
+/// @brief 使用栈实现队列的下列操作：
+///                             push(x) -- 将一个元素放入队列的尾部。
+///                             pop() -- 从队列首部移除元素。
+///                             peek() -- 返回队列首部的元素。
+///                             empty() -- 返回队列是否为空。
+/// 时间复杂度： pop和peek为O(n) push和empty为O(1)   空间复杂度：O(n)
+
 class MyQueue
 {
 public:
