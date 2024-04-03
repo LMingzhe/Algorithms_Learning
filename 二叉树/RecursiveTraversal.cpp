@@ -50,26 +50,6 @@ public:
     }
 };
 
-// 二叉树前序遍历 中-左-右
-class Solution
-{
-public:
-    void traversal(TreeNode* cur, std::vector<int>& vec)
-    {
-        if (cur == nullptr) return;
-        vec.push_back(cur->val);
-        traversal(cur->left, vec);
-        traversal(cur->right, vec);
-    }
-
-    std::vector<int> preorderTraversal(TreeNode* root)
-    {
-        std::vector<int> result;
-        traversal(root, result);
-        return result;
-    }
-};
-
 // 后序遍历 左-右-中
 class Solution
 {
