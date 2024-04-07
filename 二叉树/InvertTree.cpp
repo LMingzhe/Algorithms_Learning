@@ -7,6 +7,7 @@ using namespace std;
 
 /// leetcode 226 
 /// @brief 翻转二叉树
+/// 针对二叉树的问题，解题之前一定要想清楚究竟是前中后序遍历，还是层序遍历。
 
 // 递归法
 class Solution
@@ -46,4 +47,23 @@ public:
     }
 };
 
-// 迭代法（深度优先）
+// 迭代法（深度优先）前序遍历实现
+class Solution
+{
+public:
+    TreeNode* invertTree(TreeNode* root)
+    {
+        std::stack<TreeNode*> st;
+        if (root == nullptr) return root;
+        st.push(root);
+        while (!st.empty())
+        {
+            TreeNode* node = st.top();
+            st.pop();
+            swap(node->left, node->right);
+            if (node->right) st.push(node->right);
+            if (node->left) st.push(node->left);
+        }
+        return root;
+    }
+};
