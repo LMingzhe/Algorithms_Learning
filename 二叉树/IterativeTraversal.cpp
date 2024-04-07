@@ -49,12 +49,13 @@ public:
             }
             else
             {
-                TreeNode* node = st.top();  // 从栈里弹出的数据，就是要处理的数据
+                cur = st.top();  // 从栈里弹出的数据，就是要处理的数据
                 st.pop();
-                result.push_back(node->val);  // 中
-                st.push(cur->right);  // 右
+                result.push_back(cur->val);  // 中
+                cur = cur->right;  // 右
             }
         }
+        return result;
     }
 };
 
