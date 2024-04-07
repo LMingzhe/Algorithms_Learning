@@ -9,7 +9,7 @@ using namespace std;
 /// @brief 翻转二叉树
 /// 针对二叉树的问题，解题之前一定要想清楚究竟是前中后序遍历，还是层序遍历。
 
-// 递归法
+// 递归法 前序遍历
 class Solution
 {
 public:
