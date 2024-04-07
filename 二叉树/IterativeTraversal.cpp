@@ -40,7 +40,7 @@ public:
         std::vector<int> result;
         if (root == nullptr) return result;
         TreeNode* cur = root;
-        while (cur != nullptr && !st.empty())
+        while (cur != nullptr || !st.empty())
         {
             if (cur != nullptr)
             {
