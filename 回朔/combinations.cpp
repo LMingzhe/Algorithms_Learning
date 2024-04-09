@@ -22,7 +22,7 @@ private:
             return;
         }
         
-        for (int i = startIndex; i <= 4; i++)
+        for (int i = startIndex; i <= n; i++)
         {
             path.push_back(i);  // 处理节点
             backtracking(n, k, startIndex + 1);  // 递归
