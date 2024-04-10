@@ -25,7 +25,7 @@ private:
         for (int i = startIndex; i <= n - (k - path.size()) + 1; i++)
         {
             path.push_back(i);
-            backtracking(n, k, startIndex + 1);
+            backtracking(n, k, i + 1);
             path.pop_back();
         }
     }
