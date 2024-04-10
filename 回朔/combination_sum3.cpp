@@ -3,6 +3,10 @@
 
 using std::vector;
 
+/// leetcode 216
+/// @brief 找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
+/// 时间复杂度：O(n*2^n) 空间复杂度：O(n)
+
 class Solution
 {
 private:
