@@ -15,7 +15,7 @@ public:
     int change(int amount, vector<int>& coins)
     {
         vector<int> dp(amount + 1, 0);
-        dp[0] = 1;
+        dp[0] = 1; // dp[j]:凑成总金额j的货币组合数为dp[j]
         // NOTE 求组合数就是外层for循环遍历物品，内层for遍历背包
         // NOTE 求排列数就是外层for遍历背包，内层for循环遍历物品
         for (int i = 0; i < coins.size(); i++)
