@@ -22,7 +22,7 @@ public:
         {
             for (int j = coins[i]; j <= amount; j++)
             {
-                dp[i] = dp[i] + dp[i - coins[i]];
+                dp[j] = dp[j] + dp[j - coins[i]];
             }
         }
         return dp[amount];
