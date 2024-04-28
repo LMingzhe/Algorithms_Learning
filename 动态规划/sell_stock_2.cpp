@@ -1,17 +1,16 @@
 #include <iostream>
 #include <vector>
-#include <limits>
-#include<algorithm>
+#include <algorithm>
 
 using std::vector;
-using std::min;
 using std::max;
 
-/// leetcode 121 买卖股票最佳时期
-/// @brief prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
-///        你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
-///        返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
-// 时间复杂度O(n) 空间复杂度O(n)
+/// leetcode  122 买卖股票最佳时机2
+/// @brief 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+///        设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
+///        注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+/// 时间复杂度:O(n) 空间复杂度:O(n)
+
 class Solution
 {
 public:
@@ -19,37 +18,23 @@ public:
     {
         if (prices.size() == 0) return 0;
         vector<vector<int>> dp(prices.size(), vector<int>(2));
-        /* 空间复杂度 O(1) 写法
-            vector<vector<int>> dp(2, vector<int>(2));  // 2*2 数组
+        /* 时间复杂度 O(1) 写法
+            vector<vector<int>> dp(2, vector<int>(2));
         */
         dp[0][0] = -prices[0];
         dp[0][1] = 0;
         for (int i = 1; i < prices.size(); i++)
         {
-            dp[i][0] = max(dp[i - 1][0], -prices[i]);
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
             dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
             /*
-                dp[i % 2][0] = max(dp[(i - 1) % 2][0], -prices[i]);
+                dp[i % 2][0] = max(dp[(i - 1) % 2][0], dp[(i - 1) % 2][1] - prices[i]);
                 dp[i % 2][1] = max(dp[(i - 1) % 2][1], dp[(i - 1) % 2][0] + prices[i]);
             */
         }
         return dp[prices.size() - 1][1];
-    }
-};
-
-// 贪心做法 时间复杂度:O(n) 空间复杂度:O(1)
-class Solution
-{
-public:
-    int maxProfit(vector<int>& prices)
-    {
-        int low = INT32_MAX;
-        int result = 0;
-        for (int i = 0; i < prices.size(); i++)
-        {
-            low = min(low, prices[i]);
-            result = max(result, prices[i] - low);
-        }
-        return result;
+        /*
+            return  dp[(prices.size() - 1) % 2][1];
+        */
     }
 };
