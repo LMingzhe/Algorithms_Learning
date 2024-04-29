@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+/// leetcode 28 找出字符串中第一个匹配项的下标
 /// @brief 给定一个 haystack(文本串长度为n) 字符串和一个 needle(模式串长度为m) 字符串，
 ///        haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
 ///        实际就是实现KMP算法
