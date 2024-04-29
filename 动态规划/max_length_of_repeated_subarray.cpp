@@ -26,7 +26,7 @@ public:
                 if(dp[i][j] > result) result = dp[i][j];
             }
             /*
-                for (int j = nums2.size(); j >= 1; j--)
+                for (int j = nums2.size(); j >= 1; j--) // 遍历nums2时要从后往前，避免覆盖
                 {
                     if (nums1[i - 1] == nums2[j - 1]) dp[j] = dp[j - 1] + 1;
                     else dp[j] = 0; // 注意这里不相等要有赋0的操作
