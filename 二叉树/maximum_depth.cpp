@@ -1,11 +1,16 @@
 #include <iostream>
 #include <queue>
+#include <algorithm>
 #include "TreeNode_def.h"
 
 using std::queue;
+using std::min;
+using std::max;
 
 /// leetcode 104 二叉树的最大深度
 /// @brief 给定一个二叉树，找出其最大深度。
+/// 二叉树节点的深度（前序）：指从根节点到该节点的最长简单路径边的条数或者节点数（取决于深度从0开始还是从1开始）
+/// 二叉树节点的高度（后序）：指从该节点到叶子节点的最长简单路径边的条数或者节点数（取决于高度从0开始还是从1开始）
 
 // 前序遍历实现 
 class Solution
@@ -55,5 +60,24 @@ public:
             }
         }
         return depth;
+    }
+};
+
+// 后续遍历实现
+class Solution
+{
+public:
+    int getDepth(TreeNode* node)
+    {
+        if (node == nullptr) return 0;
+        int leftDepth = getDepth(node->left);           // 左
+        int rightDepth = getDepth(node->right);         // 右
+        int depth = 1 + max(leftDepth, rightDepth); // 中
+        return depth;
+    }
+
+    int maxDepth(TreeNode* root)
+    {
+        return getDepth(root);
     }
 };
