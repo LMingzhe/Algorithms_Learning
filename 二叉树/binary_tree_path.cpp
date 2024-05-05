@@ -3,6 +3,9 @@
 #include <string>
 #include "TreeNode_def.h"
 
+/// leetcode 257 二叉树的所有路径
+/// @brief 给定一个二叉树，返回所有从根节点到叶子节点的路径。
+
 using std::vector;
 using std::string;
 
