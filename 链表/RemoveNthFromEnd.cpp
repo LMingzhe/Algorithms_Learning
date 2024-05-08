@@ -9,6 +9,7 @@ public:
     ListNode* removeNthFromEnd(ListNode* head, int n)
     {
         ListNode* dummyHead = new ListNode(0);
+        dummyHead->next = head;
         ListNode* fast = dummyHead;
         ListNode* slow = dummyHead;
 
