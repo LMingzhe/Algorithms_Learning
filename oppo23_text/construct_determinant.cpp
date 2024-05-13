@@ -8,7 +8,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-/// @brief 这道题可以参考代码随想录哈希表中的四书相加题目
+/// @brief 这道题可以参考代码随想录哈希表中的四数相加题目
 ///        计算行列式，本质上就是找到两个乘积值相减能得到目标值
 ///        两层循环求所有可能的乘积值，用unordered_map存储，边求乘积值边搜索即可求解
 class Solution
