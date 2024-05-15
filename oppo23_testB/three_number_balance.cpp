@@ -1,60 +1,39 @@
 #include <iostream>
-#include <limits>
 #include <algorithm>
-#include <vector>
 
-using std::vector;
 using std::cin;
 using std::cout;
 using std::endl;
-using std::sort;
-using std::max;
 using std::min;
+
+/// @brief 还是有点不理解题意，何为三数平衡？以下注释为网上资料
 
 class Solution
 {
 public:
-    int getMinOp(int left, int right, int target)
+    int threeNumberBalance(int x, int y, int z)
     {
-        if ((left + right) % 2) return std::numeric_limits<int>::max();
-        int avg = (left + right) / 2;
-        int count = 0;
-        if (avg == target) return 0;
-        else if (avg > target)
-        {
-            while (avg > target)
-            {
-                target++;
-                count++;
-            }
-        }
-        else
-        {
-            while (avg < target)
-            {
-                target--;
-                count++;
-            }
-        }
-        return count;
-    }
-
-    int threeNumberBalance(vector<int>& nums)
-    {
-        std::sort(nums.begin(), nums.end());
-        int result_A = getMinOp(nums[0], nums[2], nums[1]);
-        if (result_A != std::numeric_limits<int>::max()) return result_A;
-        return std::min(getMinOp(nums[0], nums[1], nums[2]), 
-                            getMinOp(nums[1], nums[2], nums[0]));
+        // 因为任意两个整数的平均数是整数当且仅当这两个整数的奇偶性相同（即都是偶数或都是奇数）。
+        // 所以问题就变成了使x, y, z的奇偶性相同的最小操作次数。
+        int opCnt = 0;
+        // 判断每个数是否为偶数，如果是，则计数器加一
+        if (x % 2 == 0) opCnt++;
+        if (y % 2 == 0) opCnt++;
+        if (z % 2 == 0) opCnt++;
+        // 这里的最小操作次数可以是让所有的数都变成偶数，也可以是让所有的数都变成奇数。
+        // 要使所有的数都变成偶数，操作次数就是奇数的数量（3 - opCnt），
+        // 要使所有的数都变成奇数，操作次数就是偶数的数量（opCnt）。
+        // 因此，最小操作次数就是这两者中的最小值。
+        return min(opCnt, 3 - opCnt);
     }
 };
 
 int main(int argc, char const *argv[])
 {
-    vector<int> nums(3);
-    cin >> nums[0] >> nums[1] >> nums[2];
+    int x, y, z;
+    cin >> x >> y >> z;
     Solution s;
-    int result = s.threeNumberBalance(nums);
+    int result = s.threeNumberBalance(x, y, z);
     cout << result << endl;
     return 0;
 }
