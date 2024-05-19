@@ -44,7 +44,8 @@ public:
                 int left = dp[i][j - 1] + 1; // 左
                 int up = dp[i - 1][j] + 1;   // 上
                 int left_up = dp[i - 1][j - 1]; // 左上方
-                if (word1[i - 1] != word2[j - 1]) left_up += 1;
+                // 如果最后一个字母（A的第i个，B的第j个）不相同，则需要+1做一次操作，注意字符串下标从0开始要
+                if (word1[i - 1] != word2[j - 1]) left_up += 1; 
                 dp[i][j] = min(left, min(up, left_up));
             }
         }
