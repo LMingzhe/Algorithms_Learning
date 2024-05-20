@@ -6,7 +6,8 @@
 using std::stack;
 using std::queue;
 
-/// 
+/// leetcode 101 对称二叉树
+/// @brief 给你一个二叉树的根节点 root ， 检查它是否轴对称。
 
 // 递归法
 class Solution
