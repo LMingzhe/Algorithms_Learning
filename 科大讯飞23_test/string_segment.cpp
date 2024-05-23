@@ -33,14 +33,9 @@ public:
         {
             if (flag)
             {
-                // 开始分割新子串时，如果不满足连续三个相同的原则，则可以直接返回空，表示失败
-                if ((i + 2) >= str.length() || str[i] != str[i + 2]) return {};
-                else
-                {
-                    // 满足连续三个相同的原则，可以直接跳到第三个字符
-                    same = 3;
-                    i = i + 2;
-                }
+                // 新的子串不足三个字符，返回空表示失败
+                if ((i + 2) >= str.length()) return {};
+                else same = 1; // 重置same
             }
             flag = false;
             // 当前字符与下一个字符相等，same+1
@@ -50,8 +45,8 @@ public:
             }
             else // 不相等，说明当前子串在i处结束
             {
-                // 子串长度小于6且不等于3，怎么分都不满足至少3个且奇数的条件，返回空表示失败
-                if (same < 6 && same != 3) return {};
+                // 子串长度小于6且不等于3 || 子串长度小于3，怎么分都不满足至少3个且奇数的条件，返回空表示失败
+                if (same < 6 && same != 3 || same < 3) return {};
                 string subString;
                 subString = str.substr(i - same + 1, same); // 从原字符串分割出当前子串
                 dealString(subString, result);
