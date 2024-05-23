@@ -60,14 +60,8 @@ public:
 int main(int argc, char const *argv[])
 {
     int length;
-    cin >> length;
-    string str = "";
-    while (length--)
-    {
-        char c;
-        cin >> c;
-        str += c;
-    }
+    string str;
+    cin >> str;
     Solution s;
     vector<string> result = s.stringSegment(str);
     if (result.empty())
