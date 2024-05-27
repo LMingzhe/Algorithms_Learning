@@ -45,8 +45,8 @@ public:
             }
             else // 不相等，说明当前子串在i处结束
             {
-                // 子串长度小于6且不等于3 || 子串长度小于3，怎么分都不满足至少3个且奇数的条件，返回空表示失败
-                if (same < 6 && same != 3 || same < 3) return {};
+                // 子串长度小于5且不等于3 || 子串长度小于3，怎么分都不满足至少3个且奇数的条件，返回空表示失败
+                if (same < 5 && same != 3 || same < 3) return {};
                 string subString;
                 subString = str.substr(i - same + 1, same); // 从原字符串分割出当前子串
                 dealString(subString, result);
