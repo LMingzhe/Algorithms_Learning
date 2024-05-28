@@ -4,6 +4,9 @@
 
 using std::unordered_set;
 
+/// leetcode 141 环形链表
+/// @brief 给你一个链表的头节点 head ，判断链表中是否有环。
+
 // 哈希表 时间复杂度O(n) 空间复杂度O(n)
 class Solution
 {
