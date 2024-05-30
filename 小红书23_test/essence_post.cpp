@@ -9,11 +9,9 @@ int main(int argc, char** argv)
 {
     int n, m, k;
     cin >> n >> m >> k;
-    // cout << n << m << k << endl;
     vector<bool> posts(n + 1, false);
     while (m--)
     {
-        // cout << m << endl;
         int li, ri;
         cin >> li >> ri;
         for (int i = li; i < ri; i++) // 标识精华贴，左闭右开
@@ -21,6 +19,7 @@ int main(int argc, char** argv)
             posts[i] = true;
         }
     }
+    
     int maxNum = 0;
     int left = 0;
     

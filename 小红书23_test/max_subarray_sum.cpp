@@ -7,6 +7,7 @@ using namespace std;
 void subArray(vector<int>& array, int x)
 {
     // dp[i][0]:
+    // dp[i][1]:
     vector<vector<int>> dp(array.size(), vector<int>(2));
 
 }
