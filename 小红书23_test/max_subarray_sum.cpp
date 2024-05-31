@@ -22,9 +22,10 @@ void subArray(vector<int>& array, int x)
     {
         // 与leetcode53一致，若dp[i - 1][0]为负数，重新
         dp[i][0] = max(dp[i - 1][0] + array[i], array[i]);
-        // note 原先我的写法是 ： dp[i][1] = max(dp[i-1][1] + array[i], dp[i-1][0] + x);
-        // note 但这里缺少思考一种情况：当 x > dp[i-1][1] + array[i] 且 dp[i-1][0] + x < dp[i-1][1] + array[i] 时 (即 dp[i-1][0] < 0)
+        // note 原先我的写法是 ： dp[i][1] = max(dp[i - 1][1] + array[i], dp[i - 1][0] + x);
+        // note 但这里缺少思考一种情况：当 x > dp[i - 1][1] + array[i] 且 dp[i - 1][0] + x < dp[i - 1][1] + array[i] 时 (即 dp[i - 1][0] < 0)
         // note                     dp[i][1]的最优值并非为 dp[i -1][1] + array[i]，而应该是 x，相当于把array[i]替换成x重新开始了一个新的子数组
+        // note 举例 x = 701 array: -91 506 121 -161 -968 -248 -739 550 107 739
         // note 这里真的很乱难理解，想了一个上午。。。。
         dp[i][1] = max(dp[i - 1][1] + array[i], max(dp[i - 1][0] + x, x));
         // cout << "dp[" << i << "][0]: " << dp[i][0] << endl; 
