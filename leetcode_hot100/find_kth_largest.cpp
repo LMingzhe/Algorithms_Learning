@@ -10,6 +10,7 @@ using std::swap;
 ///        你必须设计并实现时间复杂度为 O(n) 的算法解决此问题。
 
 // 基于快速排序的选择方法 时间复杂度O(n) 空间复杂度O(logn)
+// note 这个解法leetcode有一个样例超时了
 class Solution
 {
 public:
@@ -36,6 +37,41 @@ public:
     {
         int n = nums.size();
         return quickSelect(nums, 0, n - 1, n - k);
+    }
+};
+
+// note leetcode 题解
+class Solution {
+public:
+    void maxHeapify(vector<int>& a, int i, int heapSize) {
+        int l = i * 2 + 1, r = i * 2 + 2, largest = i;
+        if (l < heapSize && a[l] > a[largest]) {
+            largest = l;
+        } 
+        if (r < heapSize && a[r] > a[largest]) {
+            largest = r;
+        }
+        if (largest != i) {
+            swap(a[i], a[largest]);
+            maxHeapify(a, largest, heapSize);
+        }
+    }
+
+    void buildMaxHeap(vector<int>& a, int heapSize) {
+        for (int i = heapSize / 2; i >= 0; --i) {
+            maxHeapify(a, i, heapSize);
+        } 
+    }
+
+    int findKthLargest(vector<int>& nums, int k) {
+        int heapSize = nums.size();
+        buildMaxHeap(nums, heapSize);
+        for (int i = nums.size() - 1; i >= nums.size() - k + 1; --i) {
+            swap(nums[0], nums[i]);
+            --heapSize;
+            maxHeapify(nums, 0, heapSize);
+        }
+        return nums[0];
     }
 };
 
