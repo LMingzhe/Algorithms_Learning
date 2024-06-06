@@ -29,7 +29,7 @@ public:
             if (i < j) swap(nums[i], nums[j]);
         }
         swap(nums[i], nums[pivot]);
-        if (i == target) return nums[i];
+        if (i == target) return nums[target];
         else if (target < i) return quickSelect(nums, left, i - 1, target);
         else return quickSelect(nums, i + 1, right, target);
     }
@@ -43,35 +43,23 @@ public:
 // note leetcode 题解
 class Solution {
 public:
-    void maxHeapify(vector<int>& a, int i, int heapSize) {
-        int l = i * 2 + 1, r = i * 2 + 2, largest = i;
-        if (l < heapSize && a[l] > a[largest]) {
-            largest = l;
-        } 
-        if (r < heapSize && a[r] > a[largest]) {
-            largest = r;
+    int quickselect(vector<int> &nums, int l, int r, int k) {
+        if (l == r)
+            return nums[k];
+        int partition = nums[l], i = l - 1, j = r + 1;
+        while (i < j) {
+            do i++; while (nums[i] < partition);
+            do j--; while (nums[j] > partition);
+            if (i < j)
+                swap(nums[i], nums[j]);
         }
-        if (largest != i) {
-            swap(a[i], a[largest]);
-            maxHeapify(a, largest, heapSize);
-        }
+        if (k <= j)return quickselect(nums, l, j, k);
+        else return quickselect(nums, j + 1, r, k);
     }
 
-    void buildMaxHeap(vector<int>& a, int heapSize) {
-        for (int i = heapSize / 2; i >= 0; --i) {
-            maxHeapify(a, i, heapSize);
-        } 
-    }
-
-    int findKthLargest(vector<int>& nums, int k) {
-        int heapSize = nums.size();
-        buildMaxHeap(nums, heapSize);
-        for (int i = nums.size() - 1; i >= nums.size() - k + 1; --i) {
-            swap(nums[0], nums[i]);
-            --heapSize;
-            maxHeapify(nums, 0, heapSize);
-        }
-        return nums[0];
+    int findKthLargest(vector<int> &nums, int k) {
+        int n = nums.size();
+        return quickselect(nums, 0, n - 1, n - k);
     }
 };
 
