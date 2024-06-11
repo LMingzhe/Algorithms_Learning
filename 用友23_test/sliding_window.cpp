@@ -6,6 +6,8 @@
 
 using namespace std;
 
+/// @brief 单调队列实现滑动窗口
+
 // 单调队列（从大到小）
 class MyBigQueue
 {

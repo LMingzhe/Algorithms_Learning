@@ -4,6 +4,8 @@
 
 using namespace std;
 
+/// @brief 大数想减，使用字符串进行计算，注意借位操作
+
 // 比较两个字符串表示的数字，返回1表示a > b，0表示a == b，-1表示a < b
 int compareStrings(const string& a, const string& b)
 {
