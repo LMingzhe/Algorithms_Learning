@@ -51,7 +51,7 @@ public:
         }
 
         // 从未访问过的节点开始dfs
-        for (int i = 0; i < numCourses; i++)
+        for (int i = 0; i < numCourses && valid; i++)
         {
             if (!visited[i])
             {
