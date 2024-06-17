@@ -7,7 +7,7 @@
 using namespace std;
 
 /// @brief 目前想到的只有回朔列举所有可能
-// fixme 还没昨晚，后续修改补充，是否能一个backtracking就解决？
+// fixme 还没做完，后续修改补充，是否能一个backtracking就解决？
 
 bool ifPerfectSquare(int x, int y)
 {
