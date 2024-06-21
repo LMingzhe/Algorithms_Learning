@@ -3,87 +3,70 @@
 #include <unordered_map>
 #include <cmath>
 #include <algorithm>
+#include <list>
 
 using namespace std;
 
-/// @brief 目前想到的只有回朔列举所有可能
-// fixme 还没做完，后续修改补充，是否能一个backtracking就解决？
+/// @brief 树形dp 有点难，树形dp，一般是从下往上推
 
-bool ifPerfectSquare(int x, int y)
-{
-    int squareRoot = sqrt(x * y);
-    return squareRoot * squareRoot == x * y;
-}
+int maxN = 10005;
+// dp[cur][1]：当前节点染色，那么当前节点为根节点及其左右子节点中，可以染色的最大数量
+// dp[cur][0]：当前节点不染色，那么当前节点为根节点及其左右子节点中，可以染色的最大数量
+vector<vector<int>> dp(maxN, vector<int>(2, 0));
+vector<list<int>> grid(maxN); // 邻接表
+vector<long> value(maxN); // 存储每个节点的权值
 
-void backtracking(int index, int& result, vector<bool>& redNode, int n, 
-                    unordered_map<int, int>& mapWeight, unordered_map<int, vector<int>>& mapConn)
+// 在树上进行动态规划
+void dpOnTheTree(int cur)
 {
-    // 终止条件
-    
-    // 
-    if (!redNode[index])
+    for (int child : grid[cur])
     {
-        for (const int& neighbor : mapConn[index])
-        {
-            if (!redNode[neighbor] && ifPerfectSquare(index, neighbor))
-            {
-                redNode[index] = true;
-                redNode[neighbor] = true;
-                result += 2;
-                // backtracking(neighbor,)
-            }
-        }
+        // 后序遍历，从下向上计算
+        dpOnTheTree(child);
+        // 情况一
+        dp[cur][0] += max(dp[child][0], dp[child][1]);
     }
 
+    // 计算dp[cur][1]
+    for (int child : grid[cur])
+    {
+        long mul = value[cur] * value[child];
+        long sqrtNum = (long)sqrt(mul);
+        if (sqrtNum * sqrtNum == mul)
+        {
+            // 情况二
+            // dp[cur][0]表示所有子节点染色或者不染色的最大染色数量
+            // max(dp[child][0], dp[child][1]) 需要染色节点的当前孩子节点的最大染色数量
+            // dp[cur][0] - max(dp[child][0], dp[child][1]) 除了要染色的节点及其当前子节点，其他孩子的最大染色数量
+            // 最后 + dp[child][0] + 2, 就是本节点染色的最大染色节点数量
+            dp[cur][1] = max(dp[cur][1], dp[cur][0] - max(dp[child][0], dp[child][1]) + dp[child][0] + 2);
+        }
+    }
 }
 
 int main(int argc, char const *argv[])
 {
-    unordered_map<int, int> mapWeight;
-    unordered_map<int, vector<int>> mapConn;
     int n;
     cin >> n;
-    for (int i = 0; i < n; i++)
+
+    for (int i = 1; i <= n; i++)
     {
-        int weight;
-        cin >> weight;
-        mapWeight[i] = weight;
+        cin >> value[i];
     }
-    for (int i = 0; i < n - 1; i++)
+
+    // 构建邻接表
+    for (int i = 1; i < n; i++)
     {
-        int u, v;
-        cin >> u >> v;
-        mapConn[u].push_back(v);
-        mapConn[v].push_back(u);
+        int x, y;
+        cin >> x >> y;
+        grid[x].push_back(y);
     }
-    vector<bool> redNode(n, false);
-    int result = 0;
-    // 回朔 ？贪心 ？ 动态 ？
-    for (int i = 0; i < n; i++)
-    {
-        int redNum = 0;
-        redNode.resize(n, false);
-        backtracking(i, redNum, redNode, n, mapWeight, mapConn);
-        result = min(result, redNum);
-    }
-    // for (int i = 0; i < n; i++)
-    // {
-    //     if (!redNode[i])
-    //     {
-    //         for (const int& neighbor : mapConn[i])
-    //         {
-    //             if (!redNode[neighbor] && ifPerfectSquare(mapWeight[i], mapWeight[neighbor]))
-    //             {
-    //                 // 标记染红
-    //                 redNode[i] = true;
-    //                 redNode[neighbor] = true;
-    //                 // 个数++
-    //                 result += 2;
-    //                 break;
-    //             }
-    //         }
-    //     }
-    // }
-    cout << result << endl;
+
+    // 从根节点开始进行动态规划
+    dpOnTheTree(1);
+    
+    // 输出最大染色节点数量
+    cout << max(dp[1][0], dp[1][1]) << endl;
+
     return 0;
 }
