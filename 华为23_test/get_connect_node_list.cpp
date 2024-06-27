@@ -6,6 +6,9 @@
 
 using namespace std;
 
+/// @brief 注意相邻节点ID，需要用 unsigned int or long long 表示，避免溢出
+
+// 节点类
 class Node
 {
 private:
@@ -25,6 +28,7 @@ public:
     }
 };
 
+// 判断两个节点是否连通
 bool isConnected(const vector<int>& vlanID_A, const vector<int>& vlanID_B)
 {
     for (int i = 0; i < vlanID_A.size(); i++)
@@ -51,7 +55,6 @@ int main(int argc, char const *argv[])
     {
         int vID;
         cin >> vID;
-        cout << "vID: " << vID << endl;
         A.addVlanID(vID);
     }
 
@@ -74,6 +77,8 @@ int main(int argc, char const *argv[])
         iss >> nodeID;
         // cout << "Node ID: " << nodeID << endl;
         Node B = Node(nodeID);
+        int portNum;
+        iss >> portNum;
         int vID;
         while (iss >> vID)
         {
