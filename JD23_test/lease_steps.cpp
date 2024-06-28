@@ -7,7 +7,8 @@
 using namespace std;
 
 /// @brief 动态规划
-// fixme k步，如何实现？
+
+const int INF = 4e6;
 
 int main(int argc, char const *argv[])
 {
@@ -23,47 +24,38 @@ int main(int argc, char const *argv[])
             chessBoard[i][j] = line[j];
         }
     }
+
     // dp[i][j]：移动到(i, j)位置最少需要多少步
-    vector<vector<int>> dp(n, vector<int>(m, std::numeric_limits<int>::max()));
-    // 初始化
-    for (int i = 0; i < m; i++)
-    {
-        if (chessBoard[0][i] != '*')
-        {
-            dp[0][i] = i;
-        }
-    }
+    vector<vector<int>> dp(n, vector<int>(m, INF));
+    dp[0][0] = 0;
     for (int i = 0; i < n; i++)
     {
-        if (chessBoard[i][0] != '*')
-        {
-            dp[i][0] = i;
-        }
-    }
-    for (int i = 1; i < n; i++)
-    {
-        for (int j = 1; j < m; j++)
+        for (int j = 0; j < m; j++)
         {
             if (chessBoard[i][j] == '*') continue;
-            dp[i][j] = min(dp[i - 1][j - 1], min(dp[i - 1][j], dp[i][j - 1])) + 1;
+            // 向右移动k个格子
+            for (int k = j + 1; k < m && chessBoard[i][k] == '.'; k++)
+            {
+                dp[i][k] = min(dp[i][k], dp[i][j] + 1);
+            }
+            // 向下移动k个格子
+            for (int k = i + 1; k < n && chessBoard[k][j] == '.'; k++)
+            {
+                dp[k][j] = min(dp[k][j], dp[i][j] + 1);
+            }
+            // 向右下移动k个格子
+            for (int k = 1; i + k < n && j + k < m && chessBoard[i + k][j + k] == '.'; k++)
+            {
+                dp[i + k][j + k] = min(dp[i + k][j + k], dp[i][j] + 1);
+            }
         }
     }
-    if (dp[n - 1][m - 1] == std::numeric_limits<int>::max())
+
+    if (dp[n - 1][m - 1] == INF)
     {
         cout << -1 << endl;
     } else {
         cout << dp[n - 1][m - 1] << endl;
     }
-    // for (int i = 0; i < n; i++)
-    // {
-    //     for (int j = 0; j < m; j++)
-    //     {
-    //         if (chessBoard[i][j] == '*') 
-    //         {
-    //             // int最大值表示不可达
-    //             dp[i][j] = std::numeric_limits<int>::max();
-    //         }
-    //     }
-    // }
     return 0;
 }
