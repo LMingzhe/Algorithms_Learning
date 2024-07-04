@@ -6,6 +6,7 @@ using namespace std;
 
 // fixme 迭代超内存 递归超时间。。。
 
+const int MOD = 1000000007;
 int result = 0;
 bool isCuteString(const string& s)
 {
@@ -23,7 +24,11 @@ void enumerateStrings(string current, int n)
 {
     if (current.size() == n)
     {
-        if (isCuteString(current)) result++;
+        if (isCuteString(current))
+        {
+            result++;
+            result = result % MOD;
+        } 
         return; 
     }
     enumerateStrings(current + "r", n);
