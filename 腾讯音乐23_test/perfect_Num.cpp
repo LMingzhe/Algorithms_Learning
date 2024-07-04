@@ -3,8 +3,9 @@
 #include <string>
 
 using namespace std;
-
 using ll = long long;
+
+/// @brief 简单题，注意类型大小溢出
 
 bool isPerfectNum(ll& num)
 {

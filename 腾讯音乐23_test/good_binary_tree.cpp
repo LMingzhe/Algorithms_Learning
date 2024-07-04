@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 
     for (int i = 2; i <= n; i++)
     {
-        if (i % 2 == 0) // 根据提议，能构成好二叉树的节点数量必定是奇数
+        if (i % 2 == 0) // 根据题意，能构成好二叉树的节点数量必定是奇数
         {
             dp[i] = 0;
             continue;
