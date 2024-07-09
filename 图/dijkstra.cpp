@@ -31,6 +31,9 @@ int main(int argc, char const *argv[])
 
     minDist[start] = 0; // 起始点到自身的距离为0；
 
+    // 用于记录上一个节点，打印最短路径
+    vector<int> parent(n + 1, -1);
+
     // 遍历所有节点
     for (int i = 1; i <= n; i++)
     {
@@ -57,12 +60,19 @@ int main(int argc, char const *argv[])
             if (!visisted[v] && grid[cur][v] != INT_MAX && minDist[cur] + grid[cur][v] < minDist[v])
             {
                 minDist[v] = minDist[cur] + grid[cur][v];
+                parent[v] = cur; // 更新最短路径
             }
         }
     }
 
     if (minDist[end] == INT_MAX) cout << -1 << endl; // 终点不可达
     else cout << minDist[end] << endl; // 到达终点最短路径
+
+    // 输出最短路径
+    for (int i = 1; i <= n; i++)
+    {
+        cout << parent[i] << "->" << i <<endl;
+    }
 
     return 0;
 }
