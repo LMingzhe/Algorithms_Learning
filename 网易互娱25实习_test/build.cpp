@@ -6,6 +6,8 @@ using namespace std;
 
 using ll = long long;
 
+// fixme 未完成
+
 int main(int argc, char const *argv[])
 {
     int n, A, B, C;

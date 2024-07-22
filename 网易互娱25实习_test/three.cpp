@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// 超时，通过率10%
+// fixme 超时，通过率10%
 
 bool isInfluence(const vector<int>& building, const int& x0, const int& y0)
 {
