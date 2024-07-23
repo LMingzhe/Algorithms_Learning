@@ -45,8 +45,8 @@ public:
         int n = s.length();
         for (int i = 0; i < n; i++)
         {
-            result += extend(s, i, i, n);
-            result += extend(s, i, i + 1, n);
+            result += extend(s, i, i, n);     // 奇数串
+            result += extend(s, i, i + 1, n); // 偶数串
         }
         return result;
     }
