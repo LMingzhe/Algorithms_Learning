@@ -1,0 +1,134 @@
+1. 现有一个MyData的类，其成员有定长的Vec, Str等；请针对这个类，实现一套序列化/反序列算法
+序列化：将一个类转换成二进制字节流
+反序列化: 将二进制字节流转换成一个类
+
+C++
+template <typename T, size_t Cap>
+struct Vec { 
+T[Cap];
+size_t len;
+};
+
+template <size_t Cap>
+struct Str {
+char str[Cap];
+size_t len;
+}
+
+struct MyData{
+Str<128> name {};
+Vec<512> vec {};
+}
+
+bool ser_my_data(const MyData& data, uint8_t* buff, size_t len)
+{
+   // 请补充
+}
+
+std::optinal<MyData> deser_my_data(uint8_t* buff, size_t len)
+{
+  // 请补充
+}
+
+
+2. 使用一个map和priority_queue实现一个可以更新优先级的priority_queue，MutablePriorityQueue
+**
+ * @brief 
+ * std::priority_queue是一个非侵入式容器，我们无法随意修改内部元素的优先级
+ * 我们可以通过一个std::unordered_map辅助，实现侵入式修改
+ */
+struct MutablePriorityQueue {
+  using Identity = std::string;
+  using Priority = int;
+  struct Node {
+    Identity id;
+    Priority priority;
+  };
+  /**
+   * @brief 插入一个Node
+   * 如果Node::id已经存在，则表示更新对应Node的priority
+   */
+  void push(Node) {
+    // TODO:
+  }
+  /**
+   * @brief 访问当前Priority最大的Node
+   * 
+   * @return Node
+   */
+  Node top() const {
+    // TODO:
+  }
+  /**
+   * @brief 移除当前Priority最大的Node
+   * 
+   */
+  void pop() {
+    // TODO:
+  }
+  private:
+// TODO:
+};
+
+3. 请完成下面的内存池(TODO)，减少运行时动态内存分配，需要保证线程安全
+struct MemEntry {
+   //如果>capacity, 开辟一块大小为size的内存
+   size_t alloc(size_t size);
+ 
+   //释放当前内存
+   void free();
+ 
+   //获取当前内存指针
+   uint8_t *data();
+ 
+   size_t capacity{0};
+ 
+   uint8_t *mem{nullptr};
+ };
+
+struct DataMem {
+   uint64_t seq;
+   size_t size;
+   size_t capacity;
+   uint8_t *data;
+ };
+
+struct DataMemPool {
+  //获取DataMemPool单例 
+  static DataMemPool &instance() {
+  //TODO
+  }
+ 
+  //申请一个DataMem
+  DataMem alloc(size_t size) {
+  //TODO
+  }
+ 
+  //返还一个DataMem
+  void free(DataMem &data_mem) {
+  //TODO
+  }
+  
+  //获取内存池当前总大小Bytes
+  uint64_t totalSize() {
+  //TODO
+  }
+  
+  //释放内存池所有资源
+  void destroy() {
+  //TODO
+  }
+private:
+  //扩展内存池，从内存里开辟一个新的内存空间
+  uint64_t expandMemEntries(size_t size) {
+  //TODO
+  }
+  
+  //获取一个可用且满足size要求的DataMem 
+  DataMem getDataMem(uint64_t seq, size_t size) {
+  //TODO
+  }
+  std::mutex mtx;
+  std::map<uint64_t, std::set<uint64_t>> free_seqs;
+  std::map<uint64_t, MemEntry> mem_entries;
+}；
