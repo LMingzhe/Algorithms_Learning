@@ -26,7 +26,7 @@ public:
         {
             return lhs < rhs;
         }
-    }
+    };
 
     // arg1：存储的元素类型 arg2：底层容器类型 arg3：优先级函数
     template<typename T, typename V>
