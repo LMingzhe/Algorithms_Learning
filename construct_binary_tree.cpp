@@ -30,6 +30,7 @@ TreeNode* constructBinaryTree(const vector<string>& levelOrder)
         {
             TreeNode* left = new TreeNode(stoi(levelOrder[i]));
             cur->left = left;
+            que.push(left);
         }
         ++i;
 
@@ -37,6 +38,7 @@ TreeNode* constructBinaryTree(const vector<string>& levelOrder)
         {
             TreeNode* right = new TreeNode(stoi(levelOrder[i]));
             cur->right = right;
+            que.push(right);
         }
         ++i;
     }
