@@ -22,6 +22,7 @@
 #include <set>
 #include <stack>
 #include <queue>
+#include <bits/stdc++.h> // 这个头文件包含大量标准库文件，忘记哪个库就用这个
 
 /// @brief 输出出入类
 using std::cout;

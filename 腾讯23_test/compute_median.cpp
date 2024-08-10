@@ -6,7 +6,7 @@ using  namespace std;
 
 double getMedian(const vector<int>& a)
 {
-    
+
 }
 
 void execute(vector<int>& a, vector<int>& b, vector<double>& result)
