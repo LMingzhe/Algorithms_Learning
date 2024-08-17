@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
     int n, m, p1, p2, val;
     cin >> n >> m;
 
-    // 使用邻界表来表示图，下标0不用，从1开始
+    // 使用邻接表来表示图，下标0不用，从1开始
     vector<list<Edge>> grid(n + 1);
     for (int i = 0; i < m; i++)
     {
